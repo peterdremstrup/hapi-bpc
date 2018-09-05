@@ -47,7 +47,7 @@ Example:
                 path: '/permissions/{user}',
                 method: 'GET'
             },
-            'appTicket');
+            'appTicket'); // <-- The string value 'appTicket' tells the service to use the app ticket to create the Hawk header. Use null or undefined to not use any ticket.
 
             const userTicket = request.state[bpc.env.state_name];
 
@@ -55,7 +55,7 @@ Example:
                 path: '/permissions',
                 method: 'GET'
             },
-            userTicket);
+            userTicket); // <-- Used the userTicket from state (aka. a cookie) to create the Hawk header.
         }
 
     });
