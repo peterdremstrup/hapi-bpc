@@ -21,7 +21,7 @@ This will enable:
 * Auth scheme and strategy _bpc_ to be used in routes.
 
 
-Registering route with auth scheme:
+Example:
 
 ```
 
