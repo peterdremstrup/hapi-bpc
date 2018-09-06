@@ -17,8 +17,9 @@ server.register(require('hapi-bpc'), function(err) {
 This will enable:
 
 * Fetching and auto reissue of app ticket.
-* Endpoints that quickly allows exchanges of tickets with BPC
-* The _bpc_ service under `request.server.services().bpc`
+* Endpoints that quickly allows exchanges of tickets with BPC.
+* Management of the user ticket using a cookie.
+* The _bpc_ service under `request.server.services().bpc`.
 * Auth scheme and strategy _bpc_ to be used in routes.
 
 
@@ -34,7 +35,7 @@ Example:
                 strategy: 'bpc',
                 access: {
                     scope: 'a_scope',
-                    entity: 'any|app|user'
+                    entity: 'any' // <- Can be any|app|user.
                 }
             },
             state: {
@@ -63,3 +64,7 @@ Example:
     });
 
 ```
+
+## Auth scheme
+
+When using the auth scheme `bpc`, the endpoints support both a) having the BPC ticket in a cookie, and b) a Hawk Authorization header created using a BPC ticket.
