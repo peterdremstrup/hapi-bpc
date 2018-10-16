@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/BerlingskeMedia/hapi-bpc/issues"
   },
-  "homepage": "https://www.npmjs.com/package/hapi-bpc",
+  "homepage": "https://github.com/BerlingskeMedia/hapi-bpc",
   "dependencies": {
     "boom": "^7.2.0",
     "hapi": "17.x.x",
