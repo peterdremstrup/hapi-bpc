@@ -1,21 +1,21 @@
 {
   "name": "hapi-bpc",
   "version": "0.0.1",
-  "description": "Hapi plugin to enable BPC authenticaion",
+  "description": "Hapi plugin to enable BPC authentication",
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/peterdremstrup/hapi-bmc.git"
+    "url": "https://github.com/BerlingskeMedia/hapi-bpc.git"
   },
   "author": "Daniel Kokott, Peter Dremstrup",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/BerlingskeMedia/hapi-bmc/issues"
+    "url": "https://github.com/BerlingskeMedia/hapi-bpc/issues"
   },
-  "homepage": "https://github.com/BerlingskeMedia/hapi-bmc#readme",
+  "homepage": "https://www.npmjs.com/package/hapi-bpc",
   "dependencies": {
     "boom": "^7.2.0",
     "hapi": "17.x.x",
