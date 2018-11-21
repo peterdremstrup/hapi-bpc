@@ -22,6 +22,13 @@ The _routes_ enables endpoints for clients to interact with BPC with a minimal e
 
 The plugin requires ENV vars: `BPC_URL`, `BPC_APP_ID` and `BPC_APP_SECRET`.
 
+Install plugin using:
+
+```
+npm install --save hapi-bpc
+```
+
+
 
 Register plugin with Hapi.js:
 
@@ -29,6 +36,7 @@ Register plugin with Hapi.js:
 
 server.register(require('hapi-bpc'), function(err) {
     ...
+});
 
 ```
 
