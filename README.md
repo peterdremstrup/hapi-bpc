@@ -1,8 +1,26 @@
 # hapi-bpc
 
-Hapi BPC plugin that enables service and auth scheme and strategy.
+Hapi BPC plugin that enables service, routes and auth scheme and strategy.
 
-Requires ENV vars: `BPC_URL`, `BPC_APP_ID` and `BPC_APP_SECRET`.
+Benefits of the plugin:
+
+* Fetching and auto reissue of app ticket.
+* Auth scheme and strategy _bpc_ to be used in route options.
+* Routes for clients to exchanges tickets with BPC.
+* Management of the user ticket using a cookie.
+* The _bpc_ service under `request.server.services().bpc`.
+
+The _scheme_ (and _strategy_) enables the decoration of routes auth-options. See example usage in the route options below.
+
+These routes will accept authorization in form of either A) a cookie containing BPC ticket or B) an Hawk Authorization header generated using a BPC ticket. Each request will be validated with a request to BPC.
+The `req.auth.credentials` object will reflect the autorization.
+
+The _service_ enables the Hapi server to interact with BPC with a minmal effort. See example usage in the handler below.
+
+The _routes_ enables endpoints for clients to interact with BPC with a minimal effort. See overview below.
+
+
+The plugin requires ENV vars: `BPC_URL`, `BPC_APP_ID` and `BPC_APP_SECRET`.
 
 
 Register plugin with Hapi.js:
@@ -14,16 +32,8 @@ server.register(require('hapi-bpc'), function(err) {
 
 ```
 
-This will enable:
 
-* Fetching and auto reissue of app ticket.
-* Routes for clients to exchanges tickets with BPC.
-* Management of the user ticket using a cookie.
-* The _bpc_ service under `request.server.services().bpc`.
-* Auth scheme and strategy _bpc_ to be used in routes.
-
-
-Example:
+Example usage:
 
 ```
 
@@ -43,20 +53,23 @@ Example:
             }
         },
         handler: (request, h) => {
+
+            // Getting the service to interact with BPC
             const bpc = request.server.services().bpc;
 
             const permissions = await bpc.request({
-                path: '/permissions/{user}',
+                path: '/permissions/{some_user_id}/{some_scope}',
                 method: 'GET'
             },
             'appTicket'); // <-- The string value 'appTicket' tells the service to use the app ticket to create the Hawk header.
             // Use null or undefined to not use any ticket - ie. an unauthenticated request.
 
+            // The user ticket is available because of the auth strategy.
             const userTicket = req.auth.credentials;
             // Note: req.auth.credentials can contain either a user ticket or an object {app, scope, exp} from the app ticket
 
             const permissions = await bpc.request({
-                path: '/permissions',
+                path: '/permissions/{some_scope}',
                 method: 'GET'
             },
             userTicket); // <-- Used the userTicket from state (aka. a cookie) to create the Hawk header.
