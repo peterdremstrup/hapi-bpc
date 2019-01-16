@@ -96,13 +96,13 @@ These routes will be registeret with the Hapi server:
 
 ### [POST /authenticate]
 
-This endpoint will trigger both a `POST /rsvp` and a `POST /ticket/user` request to BPC.
+Payload can be a _rsvp_ or a Gigya/Google user session.
 
-Payload must be the same as with a `POST /rsvp` request. Response will be a user _ticket_.
+If payload is _rsvcp_ this endpoint will trigger a `POST /ticket/user` request to BPC.
 
-### [DELETE /authenticate]
+If payload is a user session, this endpoint will trigger both a `POST /rsvp` and a `POST /ticket/user` request to BPC.
 
-This endpoint removes the ticket from the cookies. No other requests are made.
+Response will be a user _ticket_.
 
 ### [GET /authenticate]
 
@@ -110,29 +110,9 @@ This endpoint will trigger a `POST /ticket/reissue` request to BPC.
 
 This request will check for valid grant.
 
-### [GET /authenticate/validate]
+### [DELETE /authenticate]
 
-This endpoint will trigger a `POST /validate` request to BPC.
-
-This request does _not_ check for valid grant - _only_ valid user ticket.
-
-If the ticket is expired, it will be tried reissued.
-
-### [GET /authenticate/permissions]
-
-This endpoint will trigger a `GET /permissions` request to BPC.
-
-Response will be the permission object.
-
-If the ticket is expired, it will be tried reissued.
-
-### [POST /authenticate/ticket/user]
-
-This endpoint will trigger a `POST /ticket/user` request to BPC.
-
-Payload must be a _rsvp_.
-
-This endpoint is not strictly needed for applications using the `POST|GET /authenticate` endpoints, but used for applications wher the `/rsvp` are done in the client.
+This endpoint removes the ticket from the cookies. No other requests are made.
 
 
 # Developing
