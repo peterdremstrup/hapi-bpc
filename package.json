@@ -1,6 +1,6 @@
 {
   "name": "hapi-bpc",
-  "version": "1.1.1",
+  "version": "2.0.0",
   "description": "Hapi plugin to enable BPC authentication",
   "main": "lib/index.js",
   "scripts": {
@@ -20,7 +20,6 @@
     "boom": "^7.2.0",
     "hapi": "17.x.x",
     "hawk": "^7.0.7",
-    "joi": "^13.6.0",
-    "schmervice": "^1.0.0"
+    "joi": "^13.6.0"
   }
 }

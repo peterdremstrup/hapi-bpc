@@ -63,7 +63,7 @@ Example usage:
         handler: (request, h) => {
 
             // Getting the service to interact with BPC
-            const bpc = request.server.services().bpc;
+            const bpc = h.bpc;
 
             const permissions = await bpc.request({
                 path: '/permissions/{some_user_id}/{some_scope}',
