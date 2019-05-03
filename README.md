@@ -8,14 +8,14 @@ Benefits of the plugin:
 * Auth scheme and strategy _bpc_ to be used in route options.
 * Routes for clients to exchanges tickets with BPC.
 * Management of the user ticket using a cookie.
-* The _bpc_ service under `request.server.services().bpc`.
+* A _bpc client_ is available in the Hapi toolkit as `h.bpc`.
 
 The _scheme_ (and _strategy_) enables the decoration of routes auth-options. See example usage in the route options below.
 
 These routes will accept authorization in form of either A) a cookie containing BPC ticket or B) an Hawk Authorization header generated using a BPC ticket. Each request will be validated with a request to BPC.
 The `req.auth.credentials` object will reflect the autorization.
 
-The _service_ enables the Hapi server to interact with BPC with a minmal effort. See example usage in the handler below.
+The _toolkit_ enables interaction with BPC with a minmal effort. See example usage in the handler below.
 
 The _routes_ enables endpoints for clients to interact with BPC with a minimal effort. See overview below.
 
@@ -62,14 +62,14 @@ Example usage:
         },
         handler: (request, h) => {
 
-            // Getting the service to interact with BPC
+            // Getting the bpc client from toolkit to interact with BPC
             const bpc = h.bpc;
 
             const permissions = await bpc.request({
                 path: '/permissions/{some_user_id}/{some_scope}',
                 method: 'GET'
             },
-            'appTicket'); // <-- The string value 'appTicket' tells the service to use the app ticket to create the Hawk header.
+            'appTicket'); // <-- The string value 'appTicket' tells the bpc client to use the app ticket to create the Hawk header.
             // Use null or undefined to not use any ticket - ie. an unauthenticated request.
 
             // The user ticket is available because of the auth strategy.
