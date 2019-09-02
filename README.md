@@ -1,5 +1,7 @@
 # hapi-bpc
 
+This package is published on NPM: [https://www.npmjs.com/package/hapi-bpc](https://www.npmjs.com/package/hapi-bpc)
+
 Hapi BPC plugin that enables service, routes and auth scheme and strategy.
 
 Benefits of the plugin:
@@ -13,7 +15,6 @@ Benefits of the plugin:
 The _scheme_ (and _strategy_) enables the decoration of routes auth-options. See example usage in the route options below.
 
 These routes will accept authorization in form of either A) a cookie containing BPC ticket or B) an Hawk Authorization header generated using a BPC ticket. Each request will be validated with a request to BPC.
-The `req.auth.credentials` object will reflect the autorization.
 
 The _toolkit_ enables interaction with BPC with a minmal effort. See example usage in the handler below.
 
@@ -30,16 +31,22 @@ npm install --save hapi-bpc
 
 
 
-Register plugin with Hapi.js:
+Register plugin with Hapi.js and connect to BPC:
+
+```
+await server.register(require('hapi-bpc'));
+await server.bpc.connect();
 
 ```
 
-server.register(require('hapi-bpc'), function(err) {
-    ...
-});
+## Auth scheme and toolkit
 
-```
+After registering the plugin, routes can be decorated with the auth scheme `bpc`. The auth scheme support both A) having the BPC ticket in a cookie, and B) a Hawk Authorization header created using a BPC ticket.
 
+Autorized requests will have the credentials stored in the `req.auth.credentials` object.
+
+The BPC client will also be available on the request toolkit as `h.bpc`.
+See [https://github.com/BerlingskeMedia/bpc_client](https://github.com/BerlingskeMedia/bpc_client)
 
 Example usage:
 
@@ -86,9 +93,6 @@ Example usage:
 
 ```
 
-## Auth scheme
-
-When using the auth scheme `bpc`, the routes support both a) having the BPC ticket in a cookie, and b) a Hawk Authorization header created using a BPC ticket.
 
 ## Routes
 
