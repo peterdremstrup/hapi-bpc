@@ -10,7 +10,8 @@ Benefits of the plugin:
 * Auth scheme and strategy _bpc_ to be used in route options.
 * Routes for clients to exchanges tickets with BPC.
 * Management of the user ticket using a cookie.
-* A _bpc client_ is available in the Hapi toolkit as `h.bpc`.
+* A _bpc client_ is available on the request toolkit as `h.bpc` and the server as `server.bpc`.
+* The Hawk library is available on the server as `server.hawk`.
 
 The _scheme_ (and _strategy_) enables the decoration of routes auth-options. See example usage in the route options below.
 
@@ -30,7 +31,6 @@ npm install --save hapi-bpc
 ```
 
 
-
 Register plugin with Hapi.js and connect to BPC:
 
 ```
@@ -47,6 +47,8 @@ Autorized requests will have the credentials stored in the `req.auth.credentials
 
 The BPC client will also be available on the request toolkit as `h.bpc`.
 See [https://github.com/BerlingskeMedia/bpc_client](https://github.com/BerlingskeMedia/bpc_client)
+
+The Hawk library is also available on the server as `server.hawk`.
 
 Example usage:
 
