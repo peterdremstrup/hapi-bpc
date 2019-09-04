@@ -9,7 +9,7 @@ Benefits of the plugin:
 * Fetching and auto reissue of app ticket.
 * Auth scheme and strategy _bpc_ to be used in route options.
 * Routes for clients to exchanges tickets with BPC.
-* Management of the user ticket using a cookie.
+* Management of the user ticket using a cookie. Standard cookie settings can be overriden.
 * A _bpc client_ is available on the request toolkit as `h.bpc` and the server as `server.bpc`.
 * The Hawk library is available on the server as `server.hawk`.
 
@@ -36,6 +36,16 @@ Register plugin with Hapi.js and connect to BPC:
 ```
 await server.register(require('hapi-bpc'));
 await server.bpc.connect();
+
+```
+
+To override the standard cookie/state, use the options object, when registering the plugin.
+See [https://hapi.dev/api/?v=18.3.2#server.state()](https://hapi.dev/api/?v=18.3.2#server.state()) for details on possile settings and values.
+
+Example:
+
+```
+await server.register({ plugin: require('hapi-bpc'), options: { state: { ttl: null, encoding: 'none' } }});
 
 ```
 
