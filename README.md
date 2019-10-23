@@ -35,6 +35,7 @@ Register plugin with Hapi.js and connect to BPC:
 
 ```
 await server.register(require('hapi-bpc'));
+// Or: await server.register({ plugin: require('hapi-bpc'), options: { cors: false }});
 await server.bpc.connect();
 
 ```
