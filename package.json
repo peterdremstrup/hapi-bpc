@@ -1,6 +1,6 @@
 {
   "name": "hapi-bpc",
-  "version": "3.2.5",
+  "version": "3.3.0",
   "description": "Hapi plugin to enable BPC authentication",
   "main": "lib/index.js",
   "scripts": {
