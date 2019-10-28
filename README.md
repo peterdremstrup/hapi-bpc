@@ -111,21 +111,23 @@ Example usage:
 
 These routes will be registeret with the Hapi server:
 
-### [POST /authenticate]
+### [GET|POST /authenticate]
 
-Payload can be a _rsvp_ or a Gigya/Google user session.
+This route must be called to authorize the user in order to authorize request to routes decorated with the auth scheme `bpc`.
 
-If payload is _rsvcp_ this endpoint will trigger a `POST /ticket/user` request to BPC.
+Querystring/payload can be empty, a _rsvp_ or a Gigya/Google user session.
 
-If payload is a user session, this endpoint will trigger both a `POST /rsvp` and a `POST /ticket/user` request to BPC.
+If querystring/payload is _rsvp_ this endpoint will trigger a `POST /ticket/user` request to BPC.
+
+If querystring/payload is a user session, this endpoint will trigger both a `POST /rsvp` and a `POST /ticket/user` request to BPC.
+
+If querystring/payload is empty, a ticket in either Authorization header or cookie will be used in a `POST /ticket/reissue` request to BPC.
+This request will check for valid grant.
 
 Response will be a user _ticket_.
 
-### [GET /authenticate]
+Response will also include a cookie, that is protected by the flags _SameSite=Strict_, _Secure_ and _HttpOnly_.
 
-This endpoint will trigger a `POST /ticket/reissue` request to BPC.
-
-This request will check for valid grant.
 
 ### [DELETE /authenticate]
 
