@@ -119,9 +119,12 @@ Querystring/payload can be empty, a _rsvp_ or a Gigya/Google user session.
 
 If querystring/payload is _rsvp_ this endpoint will trigger a `POST /ticket/user` request to BPC.
 
-If querystring/payload is a user session, this endpoint will trigger both a `POST /rsvp` and a `POST /ticket/user` request to BPC.
+If querystring/payload is a Gigya or Google user session, this endpoint will trigger both a `POST /rsvp` and a `POST /ticket/user` request to BPC.
 
-If querystring/payload is empty, a ticket in either Authorization header or cookie will be used in a `POST /ticket/reissue` request to BPC.
+If payload is a ticket, the ticket will be used in a `POST /ticket/reissue` request to BPC.
+This request will check for valid grant.
+
+If querystring/payload is empty, a ticket in cookie will be used in a `POST /ticket/reissue` request to BPC.
 This request will check for valid grant.
 
 Response will be a user _ticket_.
