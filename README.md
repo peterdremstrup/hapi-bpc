@@ -90,7 +90,7 @@ Example usage:
                 method: 'GET'
             },
             'appTicket'); // <-- The string value 'appTicket' tells the bpc client to use the app ticket to create the Hawk header.
-            // Use null or undefined to not use any ticket - ie. an unauthenticated request.
+            // Use null or undefined to not use any ticket - ie. an unauthorized request.
 
             // The user ticket is available because of the auth strategy.
             const userTicket = req.auth.credentials;
@@ -111,7 +111,7 @@ Example usage:
 
 These routes will be registeret with the Hapi server:
 
-### [GET|POST /authenticate]
+### [GET|POST /authorize]
 
 This route must be called to authorize the user in order to authorize request to routes decorated with the auth scheme `bpc`.
 
@@ -132,7 +132,7 @@ Response will be a user _ticket_.
 Response will also include a cookie, that is protected by the flags _SameSite=Strict_, _Secure_ and _HttpOnly_.
 
 
-### [DELETE /authenticate]
+### [DELETE /authorize]
 
 This endpoint removes the ticket from the cookies. No other requests are made.
 
