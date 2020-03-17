@@ -22,7 +22,7 @@ The _toolkit_ enables interaction with BPC with a minmal effort. See example usa
 The _routes_ enables endpoints for clients to interact with BPC with a minimal effort. See overview below.
 
 
-The plugin requires ENV vars: `BPC_URL`, `BPC_APP_ID` and `BPC_APP_SECRET`.
+The plugin requires ENV vars: `BPC_URL`, `BPC_APP_ID` and `BPC_APP_KEY`.
 
 Install plugin using:
 
@@ -93,8 +93,8 @@ Example usage:
             // Use null or undefined to not use any ticket - ie. an unauthorized request.
 
             // The user ticket is available because of the auth strategy.
-            const userTicket = req.auth.credentials;
-            // Note: req.auth.credentials can contain either a user ticket or an object {app, scope, exp} from the app ticket
+            const userTicket = request.auth.credentials;
+            // Note: request.auth.credentials can contain either a user ticket or an object {app, scope, exp} from the app ticket
 
             const permissions = await bpc.request({
                 path: '/permissions/{some_scope}',
