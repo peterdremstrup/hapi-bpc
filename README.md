@@ -50,6 +50,9 @@ await server.register({ plugin: require('hapi-bpc'), options: { state: { ttl: nu
 
 ```
 
+
+If the ticket cookie must be served over a non-secure/non-HTTPS connection (eg. localhost development), set ENV var `SECURE_COOKIE=false`.
+
 ## Auth scheme and toolkit
 
 After registering the plugin, routes can be decorated with the auth scheme `bpc`. The auth scheme support both A) having the BPC ticket in a cookie, and B) a Hawk Authorization header created using a BPC ticket.
