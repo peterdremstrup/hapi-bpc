@@ -110,6 +110,61 @@ Example usage:
 ```
 
 
+
+Another example usage, where there is roles added to the app scopes. (In BPC, roles (`role:`) is a reserved form of scope.) Roles are created and added via the BPC Console.
+In the example below, a _user_ and _admin_ are allow to get the data. But only an _admin_ are allowed post data.
+
+See section [Scope](https://github.com/BerlingskeMedia/bpc#scope)
+
+```
+register: function (server, options) {
+
+    const bpc_app_id = server.bpc.app.id;
+
+    server.route({
+        method: 'GET',
+        path: '/data',
+        options: {
+            auth: {
+                strategy: 'bpc',
+                access: {
+                    scope: [
+                        `role:${ bpc_app_id }:user`,
+                        `role:${ bpc_app_id }:admin`
+                    ],
+                    entity: 'user'
+                }
+            },
+        },
+        handler: (request, h) => {
+            // Your magic here
+        }
+    });
+
+
+    server.route({
+        method: 'POST',
+        path: '/data',
+        options: {
+            auth: {
+                strategy: 'bpc',
+                access: {
+                    scope: [
+                        `role:${ bpc_app_id }:admin`
+                    ],
+                    entity: 'user'
+                }
+            },
+        },
+        handler: (request, h) => {
+            // Your magic here
+        }
+    });
+}
+
+```
+
+
 ## Routes
 
 These routes will be registeret with the Hapi server:
