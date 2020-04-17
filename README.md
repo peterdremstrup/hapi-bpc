@@ -88,22 +88,14 @@ Example usage:
             // Getting the bpc client from toolkit to interact with BPC
             const bpc = h.bpc;
 
-            const permissions = await bpc.request({
-                path: '/permissions/{some_user_id}/{some_scope}',
-                method: 'GET'
-            },
-            'appTicket'); // <-- The string value 'appTicket' tells the bpc client to use the app ticket to create the Hawk header.
-            // Use null or undefined to not use any ticket - ie. an unauthorized request.
-
-            // The user ticket is available because of the auth strategy.
-            const userTicket = request.auth.credentials;
+            // The user details are available because of the auth strategy.
+            const credentials = request.auth.credentials;
             // Note: request.auth.credentials can contain either a user ticket or an object {app, scope, exp} from the app ticket
 
             const permissions = await bpc.request({
-                path: '/permissions/{some_scope}',
+                path: `/permissions/${credentials.user}/{some_scope}`,
                 method: 'GET'
-            },
-            userTicket); // <-- Used the userTicket from state (aka. a cookie) to create the Hawk header.
+            });
         }
     });
 
