@@ -96,6 +96,16 @@ Example usage:
                 path: `/permissions/${credentials.user}/{some_scope}`,
                 method: 'GET'
             });
+
+            // In case the client is using the /authorize endpoints (also from this plugin) to authorize users
+            // the user ticket is available in the request state.
+            const userTicket = request.state[bpc.state_name];
+
+            // User tickets can be used for BPC requests as well, like this:
+            const permissions = await bpc.request({
+                path: `/permissions/{some_scope}`,
+                method: 'GET'
+            }, userTicket);
         }
     });
 
