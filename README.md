@@ -209,8 +209,7 @@ Before you can publish, you need to be maintainer and run `npm login`.
 
 Do this:
 
-* Commit/merge your change to master branch.
-* Run `npm version major|minot|patch` to increase the semver version in package.json file.
-* Run `npm publish`.
-* Run `git push`.
-
+1. Commit/merge your change to master branch.
+2. Run `npm version major|minor|patch` to increase the semver version in package.json file.
+3. Run `npm publish`.
+4. Run `git push`.
