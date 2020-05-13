@@ -202,3 +202,15 @@ This endpoint removes the ticket from the cookies. No other requests are made.
 Clone this repo and register it with NPM locally using the command: `npm link`
 
 Change directory to the Hapi.js project. Link the local version this repo using the command `npm link hapi-bpc`.
+
+# Publish to NPM
+
+Before you can publish, you need to be maintainer and run `npm login`.
+
+Do this:
+
+* Commit/merge your change to master branch.
+* Run `npm version major|minot|patch` to increase the semver version in package.json file.
+* Run `npm publish`.
+* Run `git push`.
+
